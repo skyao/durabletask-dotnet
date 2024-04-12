@@ -9,6 +9,8 @@
     <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
     <IncludeShared>false</IncludeShared>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
     <!-- Package info -->

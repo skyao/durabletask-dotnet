@@ -4,6 +4,8 @@
     <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
     <PackageDescription>The gRPC worker for the Durable Task Framework.</PackageDescription>
     <EnableStyleCop>true</EnableStyleCop>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>

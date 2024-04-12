@@ -38,6 +38,9 @@ public static class GrpcOrchestrationRunner
     /// The base64-encoded protobuf payload representing an orchestration execution request.
     /// </param>
     /// <param name="orchestratorFunc">A function that implements the orchestrator logic.</param>
+    /// <param name="instanceVersion">
+    /// Orchestrator instance version.
+    /// </param>
     /// <param name="services">
     /// Optional <see cref="IServiceProvider"/> from which injected dependencies can be retrieved.
     /// </param>
@@ -50,10 +53,11 @@ public static class GrpcOrchestrationRunner
     public static string LoadAndRun<TInput, TOutput>(
         string encodedOrchestratorRequest,
         Func<TaskOrchestrationContext, TInput?, Task<TOutput?>> orchestratorFunc,
+        string instanceVersion,
         IServiceProvider? services = null)
     {
         Check.NotNull(orchestratorFunc);
-        return LoadAndRun(encodedOrchestratorRequest, FuncTaskOrchestrator.Create(orchestratorFunc), services);
+        return LoadAndRun(encodedOrchestratorRequest, FuncTaskOrchestrator.Create(orchestratorFunc), instanceVersion, services);
     }
 
     /// <summary>
@@ -65,6 +69,9 @@ public static class GrpcOrchestrationRunner
     /// </param>
     /// <param name="implementation">
     /// An <see cref="ITaskOrchestrator"/> implementation that defines the orchestrator logic.
+    /// </param>
+    /// <param name="instanceVersion">
+    /// Orchestrator instance version.
     /// </param>
     /// <param name="services">
     /// Optional <see cref="IServiceProvider"/> from which injected dependencies can be retrieved.
@@ -81,6 +88,7 @@ public static class GrpcOrchestrationRunner
     public static string LoadAndRun(
         string encodedOrchestratorRequest,
         ITaskOrchestrator implementation,
+        string instanceVersion,
         IServiceProvider? services = null)
     {
         Check.NotNullOrEmpty(encodedOrchestratorRequest);
@@ -97,6 +105,13 @@ public static class GrpcOrchestrationRunner
         OrchestrationRuntimeState runtimeState = new(pastEvents);
         foreach (HistoryEvent newEvent in newEvents)
         {
+            // if newEvent is an ExecutionStarted event, we need to set InstanceVersion
+            if (newEvent.EventType == EventType.ExecutionStarted)
+            {
+                ExecutionStartedEvent ese = (ExecutionStartedEvent)newEvent;
+                ese.OrchestrationInstance.InstanceVersion = instanceVersion;
+            }
+
             runtimeState.AddEvent(newEvent);
         }
 

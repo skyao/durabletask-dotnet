@@ -6,6 +6,8 @@
 
 The client is responsible for interacting with orchestrations from outside the worker.</PackageDescription>
     <EnableStyleCop>true</EnableStyleCop>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <PropertyGroup>

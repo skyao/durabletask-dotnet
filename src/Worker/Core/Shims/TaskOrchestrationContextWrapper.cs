@@ -53,7 +53,7 @@ sealed partial class TaskOrchestrationContextWrapper : TaskOrchestrationContext
 
     /// <inheritdoc/>
     /// TODO: versioning
-    public override string InstanceVersion => "1.2.0";
+    public override string InstanceVersion => this.innerContext.OrchestrationInstance.InstanceVersion;
 
     /// <inheritdoc/>
     public override ParentOrchestrationInstance? Parent => this.invocationContext.Parent;

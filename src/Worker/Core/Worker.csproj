@@ -6,6 +6,8 @@
 
 The worker is responsible for processing durable task work items.</PackageDescription>
     <EnableStyleCop>true</EnableStyleCop>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>

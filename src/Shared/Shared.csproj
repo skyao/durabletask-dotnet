@@ -11,6 +11,8 @@
     <IsPackable>false</IsPackable>
     <IncludeShared>false</IncludeShared>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <ItemGroup>

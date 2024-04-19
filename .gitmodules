@@ -1,6 +1,5 @@
 [submodule "eng/proto"]
 	path = eng/proto
-	url = https://github.com/skyao/durabletask-protobuf
-  branch = versioning2
+	url = https://github.com/microsoft/durabletask-protobuf
 
 
